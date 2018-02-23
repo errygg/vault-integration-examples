@@ -4,7 +4,11 @@
     "vault_addr": "${vault_addr}:8200",
     "init_style": "upstart"
   },
+  "vault": {
+    "mode": "client"
+  },
   "run_list": [
-    "recipe[consul-template::default]"
+    "recipe[vault]",
+    "recipe[consul-template::install_binary]"
   ]
 }

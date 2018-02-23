@@ -18,3 +18,11 @@ data "template_file" "chef_node_file" {
     consul_addr = "${docker_container.consul.ip_address}"
   }
 }
+
+data "template_file" "vault_config_file" {
+  template = "${file("${path.module}/templates/vault_config.tpl")}"
+
+  vars {
+    consul_addr = "${docker_container.consul.ip_address}"
+  }
+}
