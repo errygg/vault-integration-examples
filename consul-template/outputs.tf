@@ -1,4 +1,11 @@
-output "backend_state" {
-  description = "The path to the backend state file"
-  value       = "${path.module}/local.tfstate"
+output "consul_container_name" {
+  value = "${docker_container.consul.name}"
+}
+
+output "vault_container_name" {
+  value = "${docker_container.vault.name}"
+}
+
+output "client_container_name" {
+  value = "${docker_container.client.name}"
 }

@@ -11,3 +11,5 @@ anything!
 
 NOTE: The current terraform-docker provider does not kill running instances. You will need to stop and prune your containers manually. You can run the following command to stop and delete all running containers:
 `docker ps -q |xargs docker rm && docker container prune -f`
+
+Also, to clean up your images run: `docker rmi $(docker images --filter "dangling=true" -q --no-trunc)`
