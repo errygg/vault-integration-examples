@@ -1,15 +1,20 @@
 # Consul Template Example for Vault/Chef Integration
 This project provides an example on how to integrate Vault with Chef using a
-Consul Template file. In order to run this locally, we are using
-kitchen-terraform to instantiate Docker containers. Firstly, we'll instantiate
-a container that will include a running Vault and Consul instance in dev mode.
-Then we'll instantiate a client that will be used to run the Chef code to
-install and configure consul-template, authenticate against the Vault/Consul
-instance and render a file local on the client. Then we'll change the password
-in Vault and ensure that the client picks up this new change without doing
-anything!
+Consul Template file.
 
-NOTE: The current terraform-docker provider does not kill running instances. You will need to stop and prune your containers manually. You can run the following command to stop and delete all running containers:
-`docker ps -q |xargs docker rm && docker container prune -f`
+## System Requirements
+This project utilizes a local instance of Docker therefore you must have
+Docker installed locally.
 
-Also, to clean up your images run: `docker rmi $(docker images --filter "dangling=true" -q --no-trunc)`
+## Running Tests
+In order to execute the test, you simply need to run `bundle exec kitchen test`.
+
+### Under the hood
+Here is what is going on when running the tests:
+
+1. 3 containers are instantiated: consul, vault, client
+2. Chef is installed and chef-solo is configured on the client
+3. The client container runs berkshelf to vendor the cookbooks necessary to install consul-template
+4. The client is then authenticated to vault and consul-template renders a file locally with credentials
+
+TBD: Then we'll change the password in Vault and ensure that the client picks up this new change without doing anything!

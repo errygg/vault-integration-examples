@@ -16,6 +16,29 @@ resource "docker_image" "consul" {
 resource "docker_container" "client" {
   image = "${docker_image.client.name}"
   name  = "client"
+
+  ports {
+    internal = 22
+    external = 2222
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      host     = "localhost"
+      port     = "2222"
+      type     = "ssh"
+      user     = "root"
+      password = "root"
+    }
+
+    inline = [
+      "apt-get update",
+      "apt-get install -y curl",
+      "curl -L https://omnitruck.chef.io/install.sh | sudo bash",
+    ]
+  }
+
+  #provisioner "chef" {}
 }
 
 resource "docker_container" "vault" {
