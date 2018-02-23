@@ -13,13 +13,42 @@ resource "docker_image" "consul" {
   keep_locally = true
 }
 
+resource "docker_network" "private_network" {
+  name = "test_network"
+}
+
 resource "docker_container" "client" {
-  image = "${docker_image.client.name}"
-  name  = "client"
+  image    = "${docker_image.client.name}"
+  name     = "client"
+  networks = ["${docker_network.private_network.id}"]
 
   ports {
     internal = 22
     external = 2222
+  }
+
+  provisioner "file" {
+    connection {
+      host     = "localhost"
+      port     = "2222"
+      user     = "root"
+      password = "root"
+    }
+
+    source      = "files/"
+    destination = "/root"
+  }
+
+  provisioner "file" {
+    connection {
+      host     = "localhost"
+      port     = "2222"
+      user     = "root"
+      password = "root"
+    }
+
+    source      = "${data.template_file.chef_node_file.rendered}"
+    destination = "/root"
   }
 
   provisioner "remote-exec" {
@@ -33,20 +62,25 @@ resource "docker_container" "client" {
 
     inline = [
       "apt-get update",
-      "apt-get install -y curl",
+      "apt-get install -y curl build-essential",
+      "mkdir -p /root/chef/cookbooks",
       "curl -L https://omnitruck.chef.io/install.sh | sudo bash",
+      "/opt/chef/embedded/bin/gem install berkshelf --no-ri --no-rdoc",
+      "ln -s /opt/chef/embedded/bin/berks /usr/local/bin/berks",
+      "berks vendor /root/chef/cookbooks/ -b ./Berksfile",
+      "chef-solo -c /root/solo.rb",
     ]
   }
-
-  #provisioner "chef" {}
 }
 
 resource "docker_container" "vault" {
-  image = "${docker_image.vault.name}"
-  name  = "vault"
+  image    = "${docker_image.vault.name}"
+  name     = "vault"
+  networks = ["${docker_network.private_network.id}"]
 }
 
 resource "docker_container" "consul" {
-  image = "${docker_image.consul.name}"
-  name  = "consul"
+  image    = "${docker_image.consul.name}"
+  name     = "consul"
+  networks = ["${docker_network.private_network.id}"]
 }

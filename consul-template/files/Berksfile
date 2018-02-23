@@ -1,0 +1,4 @@
+source 'https://supermarket.chef.io'
+metadata
+
+cookbook 'consul-template', '~> 0.13.0'
