@@ -5,7 +5,7 @@
     "init_style": "upstart"
   },
   "vault": {
-    "mode": "client"
+    "download_url": "https://releases.hashicorp.com/vault/0.9.4/vault_0.9.4_linux_amd64.zip"
   },
   "run_list": [
     "recipe[vault]",
