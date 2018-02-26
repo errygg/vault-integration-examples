@@ -1,4 +1,4 @@
-{{ with $secret := vault "secret/test" }}
-username: {{ $secret.Data.username }}
-password: {{ $secret.Data.password }}
+{{ with secret "secret/my-secret" }}
+username: {{ .Data.username }}
+password: {{ .Data.password }}
 {{ end }}
