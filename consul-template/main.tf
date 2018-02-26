@@ -157,7 +157,7 @@ resource "docker_container" "client" {
   # Init and unseal the Vault
   # TODO - this requires that Vault version ~> 0.9.4 is installed locally
   provisioner "local-exec" {
-    command = "VAULT_ADDR=http://localhost:8200 && VAULT_INIT_DATA=`vault operator init -format=json -key-shares=1 -key-threshold=1` && VAULT_UNSEAL_KEY=`echo $VAULT_INIT_DATA | jq -r '.unseal_keys_b64 | .[]'` && echo $VAULT_UNSEAL_KEY > ${path.module}/tmp/vault_unseal_key.txt && vault operator unseal $VAULT_UNSEAL_KEY"
+    command = "VAULT_ADDR=http://localhost:8200 && VAULT_INIT_DATA=`vault operator init -format=json -key-shares=1 -key-threshold=1` && VAULT_UNSEAL_KEY=`echo $VAULT_INIT_DATA | jq -r '.unseal_keys_b64 | .[]'` && mkdir -p ${path.module}/tmp && echo $VAULT_UNSEAL_KEY > ${path.module}/tmp/vault_unseal_key.txt && vault operator unseal $VAULT_UNSEAL_KEY"
   }
 
   # provisioner "remote-exec" {

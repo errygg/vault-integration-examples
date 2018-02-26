@@ -3,3 +3,4 @@ terraform.tfstate.d
 .kitchen
 Gemfile.lock
 local.tfstate*
+consul-template/tmp/*
