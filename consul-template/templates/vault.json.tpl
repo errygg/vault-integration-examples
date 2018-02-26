@@ -1,7 +1,7 @@
 {
   "backend":{
     "consul":{
-      "address":"${consul_addr}:9500",
+      "address":"${consul_addr}:8500",
       "advertise_addr":"http://${consul_addr}",
       "path":"vault/"
     }
