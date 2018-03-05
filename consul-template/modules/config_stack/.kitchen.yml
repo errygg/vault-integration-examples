@@ -1,0 +1,19 @@
+driver:
+  name: terraform
+
+provisioner:
+  name: terraform
+
+transport:
+  name: ssh
+  password: root
+
+verifier:
+  name: terraform
+  format: doc
+
+suites:
+  - name: default
+
+platforms:
+  - name: terraform

@@ -1,0 +1,15 @@
+{
+  "backend":{
+    "consul":{
+      "address":"${consul_addr}:8500",
+      "advertise_addr":"http://${consul_addr}",
+      "path":"vault/"
+    }
+  },
+  "listener":{
+    "tcp":{
+      "address":"0.0.0.0:8200",
+      "tls_disable":1
+    }
+  }
+}
