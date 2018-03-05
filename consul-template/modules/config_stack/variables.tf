@@ -1,3 +1,3 @@
-variable "user_token" {
+variable "root_token" {
   description = "User token for adding Vault objects"
 }

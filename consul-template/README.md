@@ -22,6 +22,19 @@ TBD: Then we'll change the password in Vault and ensure that the client picks up
 NOTE: to reinitialize the vault, set CONSUL_HTTP_ADDR and run:
 `consul kv delete -recurse vault`
 
+
+In order to run this, it requires some manual intervention.
+
+1. Run `bundle exec kitchen terraform` in the setup_stack module first.
+2. cat out the tmp/vault_root_token.txt file and save that in a variable `export TF_VAR_user_token=<root_token>`.
+3. Run `bundle exec kitchen terraform` in the config_stack module next.
+4. Export the Vault address `export VAULT_ADDR=http://localhost:8200`
+4. Get a user token with the new username/password created by the config_stack module
+`vault login -method=userpass username=myusername` with `mypassword` as the password. Save off that token.
+5. ssh into the client machine `ssh root@localhost -p 2222` with `root` as the password.
+6. Export the token: `export VAULT_TOKEN=<user_token>` and run `consul-template -once -config=./consul_template_config.json`
+
+
 Resources:
 https://github.com/hashicorp/vault/issues/835
 https://github.com/hashicorp/vault/issues/329

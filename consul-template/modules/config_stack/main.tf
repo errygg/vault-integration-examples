@@ -2,8 +2,8 @@ resource "vault_auth_backend" "userpass" {
   type = "userpass"
 }
 
-resource "vault_policy" "my-app" {
-  name = "my-app"
+resource "vault_policy" "myapp" {
+  name = "myapp"
 
   policy = <<EOT
 path "secret/*" {
@@ -12,23 +12,23 @@ path "secret/*" {
 EOT
 }
 
-resource "vault_generic_secret" "my-user" {
+resource "vault_generic_secret" "myusername" {
   path = "auth/userpass/users/myusername"
 
   data_json = <<EOT
 {
   "password": "mypassword",
-  "policies": "${vault_policy.my-app.name}"
+  "policies": "${vault_policy.myapp.name}"
 }
 EOT
 }
 
-resource "vault_generic_secret" "my-secret" {
-  path = "secret/my-secret"
+resource "vault_generic_secret" "mysecret" {
+  path = "secret/mysecret"
 
   data_json = <<EOT
 {
-  "my-value": "supersecret"
+  "myvalue": "supersecret"
 }
 EOT
 }

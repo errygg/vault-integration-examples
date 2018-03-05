@@ -1,7 +1,7 @@
 {
   "consul-template": {
     "consul_addr": "${consul_addr}:8500",
-    "vault_addr": "${vault_addr}:8200",
+    "vault_addr": "http://${vault_addr}:8200",
     "init_style": "upstart"
   },
   "vault": {

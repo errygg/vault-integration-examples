@@ -159,7 +159,7 @@ resource "docker_container" "client" {
   provisioner "local-exec" {
     command = <<EOT
 mkdir -p ${path.module}/tmp &&\
-VAULT_ADDR=http://localhost:8200 &&\
+export VAULT_ADDR=http://localhost:8200 &&\
 VAULT_INIT_DATA=`vault operator init -format=json -key-shares=1 -key-threshold=1` &&\
 VAULT_ROOT_TOKEN=`echo $VAULT_INIT_DATA | jq -r '.root_token'` &&\
 echo $VAULT_ROOT_TOKEN > ${path.module}/tmp/vault_root_token.txt &&\

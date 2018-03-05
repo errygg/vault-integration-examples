@@ -1,4 +1,3 @@
-{{ with secret "secret/my-secret" }}
-username: {{ .Data.username }}
-password: {{ .Data.password }}
+{{ with secret "secret/mysecret" }}
+secret: {{ .Data.myvalue }}
 {{ end }}
