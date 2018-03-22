@@ -31,17 +31,31 @@ Here is what is going on when running the tests:
 ## Resources
 
 https://github.com/hashicorp/vault/issues/835
+
 https://github.com/hashicorp/vault/issues/329
+
 https://stackoverflow.com/questions/35885222/reading-vault-secrets-from-consul-template
+
 https://github.com/hashicorp/consul-template
+
 https://github.com/adamkrone/chef-consul-template
+
 https://github.com/hashicorp/consul-template
+
 https://www.consul.io/docs/agent/dns.html
+
 https://werner-dijkerman.nl/2017/01/15/setting-up-a-secure-vault-with-a-consul-backend/
+
 https://github.com/hashicorp/terraform/issues/8090
+
 https://wilsonmar.github.io/hashicorp-vault/
+
 https://github.com/hashicorp/vault/issues/72
+
 http://chairnerd.seatgeek.com/practical-vault-usage/
+
 https://www.vaultproject.io/docs/configuration/storage/consul.html
+
 https://github.com/hashicorp/docker-consul/tree/master/0.X
+
 https://medium.com/@pcarion/a-consul-a-vault-and-a-docker-walk-into-a-bar-d5a5bf897a87
