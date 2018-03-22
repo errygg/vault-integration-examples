@@ -162,7 +162,7 @@ mkdir -p ${path.module}/tmp &&\
 export VAULT_ADDR=http://localhost:8200 &&\
 VAULT_INIT_DATA=`vault operator init -format=json -key-shares=1 -key-threshold=1` &&\
 VAULT_ROOT_TOKEN=`echo $VAULT_INIT_DATA | jq -r '.root_token'` &&\
-echo $VAULT_ROOT_TOKEN > ${path.module}/tmp/vault_root_token.txt &&\
+echo VAULT_TOKEN=$VAULT_ROOT_TOKEN > ${path.module}/tmp/vault_root_token.txt &&\
 VAULT_UNSEAL_KEY=`echo $VAULT_INIT_DATA | jq -r '.unseal_keys_b64 | .[]'` &&\
 echo $VAULT_UNSEAL_KEY > ${path.module}/tmp/vault_unseal_key.txt &&\
 vault operator unseal $VAULT_UNSEAL_KEY

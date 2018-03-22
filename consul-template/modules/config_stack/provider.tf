@@ -1,3 +1,1 @@
-provider "vault" {
-  token = "${var.root_token}"
-}
+provider "vault" {}
