@@ -9,13 +9,13 @@ Docker installed locally.
 Because of the nature of how Vault is instantiated, this project has to be executed in a particular order and with multiple steps.
 
 1. Run `bundle exec kitchen converge` in the [setup_stack](consul-template/modules/setup_stack) module first.
-2. cat out the `tmp/vault_root_token.txt` file and save that in a variable `export TF_VAR_user_token=<root_token>`.
-3. Run `bundle exec kitchen converge` in the [config_stack](consul-template/modules/config_stack) module next.
-4. Export the Vault address `export VAULT_ADDR=http://localhost:8200`
-4. Get a user token with the new username/password created by the config_stack module
+2. Source the `./tmp/vault_root_token.txt` file which will export the `VAULT_TOKEN`
+3. Export the Vault address `export VAULT_ADDR=http://localhost:8200`
+4. Run `bundle exec kitchen converge` in the [config_stack](consul-template/modules/config_stack) module next.
+5. Get a user token with the new username/password created by the config_stack module
 `vault login -method=userpass username=myusername` with `mypassword` as the password. Save off that token.
-5. ssh into the client machine `ssh root@localhost -p 2222` with `root` as the password.
-6. Export the token: `export VAULT_TOKEN=<user_token>` and run `consul-template -once -config=./consul_template_config.json`
+6. ssh into the client machine `ssh root@localhost -p 2222` with `root` as the password.
+7. Export the token: `export VAULT_TOKEN=<user_token>` and run `consul-template -once -config=./consul_template_config.json`
 
 ### Under the hood
 Here is what is going on when running the tests:
