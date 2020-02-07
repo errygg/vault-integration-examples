@@ -10,6 +10,7 @@ import (
 	"path"
 	"syscall"
 
+	_ "github.com/lib/pq"
 	"gopkg.in/yaml.v2"
 )
 
@@ -94,7 +95,7 @@ func main() {
 	}
 	defer db.Close()
 
-	log.Println("Successfully connected!")
+	log.Println("Successfully connected to `postgres`")
 
 	fs := Wrap(http.FileServer(http.Dir(secretpath)))
 	http.HandleFunc("/", fs)

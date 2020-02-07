@@ -35,4 +35,4 @@ ${DIR?}/../deployments/postgres/run.sh
 echo -e "\n>>>> Install, configure, and start Vault server..."
 helm install vault \
   --namespace="${NAMESPACE?}" \
-  -f ${DIR?}/../deployments/vault/values.yaml https://github.com/hashicorp/vault-helm/archive/v0.3.3.tar.gz
+  -f ${DIR?}/../deployments/vault/values.yaml ${DIR?}/../deployments/vault-helm

@@ -20,7 +20,13 @@ spec:
         vault.hashicorp.com/agent-inject-secret-db-creds: "database/creds/db-app"
         vault.hashicorp.com/agent-inject-template-db-creds: |
           {{- with secret "database/creds/db-app" -}}
-          postgres://{{ .Data.username }}:{{ .Data.password }}@postgres.postgres.svc:5432/wizard?sslmode=disable
+          database:
+            user: "{{ .Data.username }}"
+            password: "{{ .Data.password }}"
+            host: "postgres.postgres.svc"
+            port: 5432
+            dbname: "wizard"
+            sslmode: "disable"
           {{- end }}
         # TLS SERVER CERTIFICATE
         vault.hashicorp.com/agent-inject-secret-server.cert: "pki/issue/hashicorp-com"
@@ -53,5 +59,6 @@ spec:
       serviceAccountName: app
       containers:
       - name: app
-        image: jodonnellhashi/vault-k8s-demo-app:0.2.0
+        #image: jodonnellhashi/vault-k8s-demo-app:0.2.0
+        image: errygg/app:latest
         imagePullPolicy: Always
