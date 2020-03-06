@@ -22,6 +22,6 @@ spec:
       serviceAccountName: app
       containers:
       - name: app
-        image: errygg/app:latest
+        image: jodonnellhashi/vault-k8s-demo-app:0.2.0
         imagePullPolicy: Always
 EOF

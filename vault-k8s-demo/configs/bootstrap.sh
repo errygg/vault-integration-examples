@@ -27,8 +27,8 @@ vault write auth/kubernetes/role/db-app \
     bound_service_account_names=app \
     bound_service_account_namespaces=app \
     policies=app \
-    token_max_ttl=60s \
-    ttl=30s
+    token_max_ttl=600s \
+    ttl=300s
 
 vault write auth/kubernetes/role/db-backup \
     bound_service_account_names=pgdump \

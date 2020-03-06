@@ -33,20 +33,20 @@ $ ./1_setup.sh
 1. Show the pods that got created
 
 ```shell
-$ 2_getpods.sh
+$ ./2_getpods.sh
 ```
 
 1. Run the app without the injector patch
 
 ```shell
-$ 3_runapppatch.sh
+$ ./3_runapppatch.sh
 ```
 
 1. Run the check secrets script to observe the contents of the secrets file,
 initially the file will not exist
 
 ```shell
-$ 4_checksecrets.sh
+$ ./4_checksecrets.sh
 ```
 
 1. Run a watch on the app pods
@@ -64,7 +64,24 @@ to observe the reauth every 60 seconds with new secrets being rendered.
 $ 5_patchapp.sh
 ```
 
-1. 
+1. Run postgress connection app
+
+```shell
+$ ./10_app.sh
+```
+
+1. Take a look at the fileserver brower to see secrets
+
+```shell
+$ kubectl port-forward $(kubectl get pods -n app -o jsonpath='{.items..metadata.name}') -n app 8080:8080
+```
+
+1. Take a look at the logs for the app to see the successful connection
+
+```shell
+$ kubectl logs -n app -c app $(kubectl get pods -n app -o jsonpath='{.items..metadata.name}')
+```
+
 
 Resources:
 
