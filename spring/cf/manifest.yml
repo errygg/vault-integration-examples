@@ -1,0 +1,7 @@
+---
+applications:
+- name: spring-vault-cf-app
+  instances: 1
+  disk: 256M
+  memory: 1024M
+  path: target/App-0.0.1-SNAPSHOT.jar

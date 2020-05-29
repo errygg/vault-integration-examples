@@ -16,13 +16,13 @@ $ cd terraform/
 $ terraform apply
 ```
 
-1. Configure `kubectl` to run locally
+2. Configure `kubectl` to run locally
 
 ```shell
 $ gcloud container clusters get-credentials <cluster-name> --region <region>
 ```
 
-1. Setup the Kubernetes namespaces, install Helm TLS, add the bootstrap configs
+3. Setup the Kubernetes namespaces, install Helm TLS, add the bootstrap configs
 and start up PostgreSQL and the Vault server and vault-k8s injector
 
 ```shell
@@ -30,32 +30,32 @@ $ cd scripts/
 $ ./1_setup.sh
 ```
 
-1. Show the pods that got created
+4. Show the pods that got created
 
 ```shell
 $ ./2_getpods.sh
 ```
 
-1. Run the app without the injector patch
+5. Run the app without the injector patch
 
 ```shell
 $ ./3_runapppatch.sh
 ```
 
-1. Run the check secrets script to observe the contents of the secrets file,
+6. Run the check secrets script to observe the contents of the secrets file,
 initially the file will not exist
 
 ```shell
 $ ./4_checksecrets.sh
 ```
 
-1. Run a watch on the app pods
+7. Run a watch on the app pods
 
 ```shell
 $ watch kubectl get pods -n app -o jsonpath='{.items..spec.containers[*].name}'
 ```
 
-1. Run the patch and watch the secrets and pods. You should observe the init
+8. Run the patch and watch the secrets and pods. You should observe the init
 and sidecar containers starting up, and the init container going away. You
 should also see the file contents of the secrets file display. Continue watching
 to observe the reauth every 60 seconds with new secrets being rendered.
@@ -64,7 +64,13 @@ to observe the reauth every 60 seconds with new secrets being rendered.
 $ 5_patchapp.sh
 ```
 
-1. Run postgress connection app
+9. Cleanup and run the app demo
+
+```powershell
+$ 
+```
+
+9. Run postgress connection app
 
 ```shell
 $ ./10_app.sh
