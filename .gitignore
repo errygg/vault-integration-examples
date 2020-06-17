@@ -8,3 +8,4 @@ local.tfstate*
 consul-template/modules/setup_stack/tmp/*
 vault-k8s-demo/pkg/*
 terraform.tfstate
+.terraform

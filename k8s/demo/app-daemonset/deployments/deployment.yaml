@@ -21,7 +21,7 @@ spec:
         - /bin/sh
         - -ec
         args:
-        - vault agent -config=/vault/config/config-init.json
+        - vault agent -config=/vault/config/config-init.json && sleep 15
         env:
         - name: VAULT_LOG_LEVEL
           value: "debug"

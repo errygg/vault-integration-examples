@@ -85,8 +85,7 @@ data:
           "destination": "/vault/secrets/db-creds",
           "contents": "{{- with secret \"database/creds/db-app\" -}}\npostgres://{{ .Data.username }}:{{ .Data.password }}@postgres.postgres.svc:5432/wizard?sslmode=disable\n{{- end }}\n",
           "left_delimiter": "{{",
-          "right_delimiter": "}}",
-          "command": "sleep 20"
+          "right_delimiter": "}}"
         },
         {
           "destination": "/vault/secrets/server.cert",

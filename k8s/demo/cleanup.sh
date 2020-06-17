@@ -3,7 +3,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 CONFIG="configmap,serviceaccount,secret"
-DEPLOY="deployment,pod,replicaset,service,statefulset"
+DEPLOY="deployment,pod,replicaset,service,statefulset,daemonset"
 DEPLOY="clusterrole,clusterrolebinding"
 OBJECTS="${CONFIG?},${DEPLOY?}"
 
