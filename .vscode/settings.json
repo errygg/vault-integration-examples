@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
   "java.configuration.updateBuildConfiguration": "automatic"
+=======
+  "java.configuration.updateBuildConfiguration": "interactive"
+>>>>>>> master
 }

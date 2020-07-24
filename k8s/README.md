@@ -26,14 +26,20 @@ $ cd terraform/
 $ terraform apply
 ```
 
-1. Configure `kubectl` to run locally
+1. Configure `kubectl` to run locally (this command is output from the terraform run)
 
 ```shell
-$ gcloud container clusters get-credentials <cluster-name> --region <region>
+$ gcloud container clusters get-credentials <cluster_name> --region <region>
 ```
 
 1. See the appropriate `README.md` in the `demo` directory for the demo you'd
    like to run.
+
+   These demos include:
+   * Running Vault clients in a daemonset on each of the K8s nodes
+   * Running an application that uses a mutating webhook to inject credentials at start
+   * Patching an existing application to use a mutating webhook to inject credentials
+   * Running a job that consumes credentials from Vault
 
 ## Resources
 
