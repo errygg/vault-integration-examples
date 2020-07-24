@@ -1,9 +1,9 @@
 package com.hashicorp.vault.demovault;
 
-public class DemoVaultApplication {
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-  @Value("${spring.application.name}")
-  private String appName;
+@SpringBootApplication
+public class DemoVaultApplication {
 
   public static void main(String[] args) {
 		SpringApplication.run(DemoVaultApplication.class, args);
