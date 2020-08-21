@@ -15,7 +15,7 @@ vault login -no-print ${root?}
 
 vault policy write jenkins jenkins-policy.hcl
 vault auth enable approle
-vault write auth/approle/role/jenkins secret_id_ttl=60m token_ttl=60m token_max_ttl=120m policies="jenkins"
+vault write auth/approle/role/jenkins secret_id_ttl=5m token_ttl=5m token_max_ttl=10m policies="jenkins"
 
 vault secrets enable -version=1 -path=kv_v1 kv
 
