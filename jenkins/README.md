@@ -59,7 +59,13 @@ $ vault write -f auth/approle/role/jenkins/secret-id
 
 1. Remove the credential and recreate with "Vault Token File Credential"
 
-1. Vault agent can now be used to manage this credential
+1. Run Vault agent
+
+```sh
+
+```
+
+2. Vault agent can now be used to manage this credential
 
 
 
