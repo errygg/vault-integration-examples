@@ -1,0 +1,9 @@
+name: vault
+title: Basic HashiCorp Vault package.
+maintainer: Erik R. Rygg
+license: Apache-2.0
+summary: Verify the foundations of a Vault deployment
+version: 0.1.0
+supports:
+  platform: os
+inspec_version: "~> 4.0"
