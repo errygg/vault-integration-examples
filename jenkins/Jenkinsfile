@@ -1,0 +1,13 @@
+node {
+  def secrets = [
+    [path: 'kv_v1/test', engineVersion: 1, secretValues: [
+      [envVar: 'KV_V1_SECRET_ONE', vaultKey: 'value']]
+    ]
+  ]
+  def configuration = [vaultUrl: 'http://localhost:8200',
+                       vaultCredentialId: 'vault-credential-id',
+                       engineVersion: 1]
+    withVault([configuration: configuration, vaultSecrets: secrets]) {
+      sh 'echo $KV_V1_SECRET_ONE'
+    }
+}
