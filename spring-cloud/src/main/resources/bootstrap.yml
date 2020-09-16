@@ -5,7 +5,7 @@ spring.cloud.vault:
   port: 8200
 
 # Using Token authentication to test, comment out this line to test with PCF authentication
-  token: s.PCwDJnJHFW8fIKnqkkzuKT11
+  token: s.nrCUKVUJodAw6seevxK8LNrH
 
 # Uncomment these lines to test with PCF authentication (keep the indention)
 #  namespace: pcf_testing_space

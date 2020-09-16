@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
-//import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,26 +34,9 @@ public class VaultPcfApplication implements ApplicationRunner {
   @Value("${password}")
   public String password;
 
-  // @Override
-  // public void run(String... strings) throws Exception {
-
-  //   // Read values using injection
-  //   log.info("'username' injected via @Value : {}", username);
-  //   log.info("'password' injected via @Value : {}", password);
-
-  //   // Read values directly
-  //   VaultResponse response = vaultTemplate.opsForKeyValue("kv", KeyValueBackend.KV_2).get("vaultpcf");
-  //   log.info("'username' from response: {}", response.getData().get("username"));
-  //   log.info("'username' from response: {}", response.getData().get("password"));
-
-  //   // Dynamic Postgres database example
-  //   // TODO
-
-  // }
-
   @GetMapping("/")
   public String home() {
-    return "Hello, " + username + " " + password;
+    return "Read /kv/vaultpcf username: " + username + " and password: " + password;
   }
 
   @Override
