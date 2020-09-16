@@ -13,7 +13,7 @@ cd ./scripts
 cd ../
 ```
 
-1. Get the root token from the output file
+2. Get the root token from the output file
 
 ```sh
 cat /tmp/vault-output.txt | grep "Root Token"
@@ -21,7 +21,7 @@ cat /tmp/vault-output.txt | grep "Root Token"
 
 Copy the root token to the `spring.cloud.vault.token` file in `./src/main/resources/bootstrap.properties` file.
 
-1. Run the build
+3. Run the build
 
 ```sh
 ./gradlew bootRun
@@ -42,4 +42,4 @@ And you can go to http://localhost:8080 and see:
 Read /kv/vaultpcf username: user and password: pass
 ```
 
-1. Cleanup the Vault deployment by running `./scripts/cleanup.sh`
+4. Cleanup the Vault deployment by running `./scripts/cleanup.sh`
