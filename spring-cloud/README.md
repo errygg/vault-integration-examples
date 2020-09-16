@@ -35,3 +35,11 @@ You should see the following log output:
 2020-09-16 16:30:37.316  INFO 6652 --- [           main] vaultpcf.VaultPcfApplication             : 'username' from response: user
 2020-09-16 16:30:37.316  INFO 6652 --- [           main] vaultpcf.VaultPcfApplication             : 'username' from response: pass
 ```
+
+And you can go to http://localhost:8080 and see:
+
+```text
+Read /kv/vaultpcf username: user and password: pass
+```
+
+1. Cleanup the Vault deployment by running `./scripts/cleanup.sh`
