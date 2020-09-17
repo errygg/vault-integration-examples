@@ -13,6 +13,13 @@ vault operator unseal ${unseal?}
 
 vault login -no-print ${root?}
 
+if [ "$1" = "namespace" ]
+then
+  vault namespace create ns1
+
+  export VAULT_NAMESPACE=ns1
+fi
+
 vault secrets enable -version=2 kv
 
 vault kv put kv/vaultpcf username="user" password="pass"

@@ -1,14 +1,15 @@
 # Configure the Vault service endpoint
 spring.cloud.vault:
-  scheme: http
-  host: localhost
-  port: 8200
+  # scheme: http
+  # host: localhost
+  # port: 8200
+  uri: http://localhost:8200/ns1
 
 # Using Token authentication to test, comment out this line to test with PCF authentication
-  token: s.nrCUKVUJodAw6seevxK8LNrH
+  token: s.CKatbaSiE6cscZcScXTArbge
 
 # Uncomment these lines to test with PCF authentication (keep the indention)
-#  namespace: pcf_testing_space
+#  namespace: ns1
 #  authentication: pcf
 #  role: flasktest
 #  pcf.pcf-path: cf
