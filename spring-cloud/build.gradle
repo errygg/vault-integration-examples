@@ -22,7 +22,7 @@ configurations {
 }
 
 ext {
-  springCloudVersion = 'Greenwich.SR2'
+  springCloudVersion = 'Hoxton.SR7'
 }
 
 sourceCompatibility = 1.8
