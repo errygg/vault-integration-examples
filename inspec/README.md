@@ -43,5 +43,5 @@ inspec plugin install inspec-vault
 1. Run `inspec` tests
 
   ```bash
-  inspec exec ./vault/
+  inspec exec ./vault/profile
   ```
