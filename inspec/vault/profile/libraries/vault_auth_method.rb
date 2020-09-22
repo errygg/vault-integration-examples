@@ -1,4 +1,5 @@
 require 'json'
+require 'net/http'
 
 class VaultAuthMethod < Inspec.resource(1)
   name "vault_auth_method"
@@ -11,11 +12,12 @@ class VaultAuthMethod < Inspec.resource(1)
     @params = {}
 
     begin
-      @vault_command = run_vault_auth_list()
-      if is_vault_sealed?(@vault_command.stderr)
-        return skip_resource "Unable to authenticate, Vault is sealed"
-      end
-      json_output = parse(@vault_command.stdout)
+      #@vault_command = run_cli()
+      # if is_vault_sealed?(@vault_command.stderr)
+      #   return skip_resource "Unable to authenticate, Vault is sealed"
+      # end
+      #json_output = parse(@vault_command.stdout)
+      json_output = parse(run_api())
       @params = json_output
       @params["type"] = json_output[path]["type"]
       @params["default_lease_ttl"] = json_output[path]["config"]["default_lease_ttl"]
@@ -60,14 +62,24 @@ class VaultAuthMethod < Inspec.resource(1)
     output.include?('Vault is sealed')
   end
 
-  def run_vault_auth_list
-    inspec.command(format_command)
+  def run_cli
+    inspec.command('vault auth list -format json')
   rescue StandardError => e
     skip_resource "Unable to run `vault` command: #{e.message}"
   end
 
-  def format_command
-    command = 'vault auth list -format json'
-    command
+  def run_api
+    uri = URI("#{@addr}/v1/sys/auth")
+    req = Net::HTTP::Get.new(uri)
+    req['X-Vault-Token'] = @token
+
+    res = Net::HTTP.start(uri.hostname, uri.port) {|http|
+      http.request(req)
+    }
+
+    return skip_resource "Unable to authenticate, Vault is sealed" if is_vault_sealed?(res.body)
+
+    res.body
+
   end
 end
