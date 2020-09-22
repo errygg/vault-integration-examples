@@ -15,20 +15,20 @@ locals {
   db_ns = "database"
 }
 
-# Create namespaces for 3-tier application
+# # Create namespaces for 3-tier application
 
-resource "vault_namespace" "ui" {
-  #path = local.ui_ns
-  path  = "ui"
-}
+# resource "vault_namespace" "ui" {
+#   #path = local.ui_ns
+#   path  = "ui"
+# }
 
-resource "vault_namespace" "app_server" {
-  path = local.app_svr_ns
-}
+# resource "vault_namespace" "app_server" {
+#   path = local.app_svr_ns
+# }
 
-resource "vault_namespace" "database" {
-  path = local.db_ns
-}
+# resource "vault_namespace" "database" {
+#   path = local.db_ns
+# }
 
 # UI namespace will use AppRole authentication
 resource "vault_auth_backend" "ui_approle" {

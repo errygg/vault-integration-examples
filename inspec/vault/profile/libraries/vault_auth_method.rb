@@ -49,7 +49,6 @@ class VaultAuthMethod < Inspec.resource(1)
   def parse(output)
     return [] if output.nil?
 
-
     JSON.parse(output)
 
   rescue JSON::ParserError => e
@@ -57,8 +56,8 @@ class VaultAuthMethod < Inspec.resource(1)
     []
   end
 
-  def is_vault_sealed?(command_output)
-    command_output.include?('Vault is sealed')
+  def is_vault_sealed?(output)
+    output.include?('Vault is sealed')
   end
 
   def run_vault_auth_list

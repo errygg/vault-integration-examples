@@ -18,29 +18,31 @@ deployed HashiCorp Vault resources. This can be done in 2 ways as described:
   ./scripts/configure-vault.sh
   ```
 
-1. Set the token to run `terraform`
+2. Set the token to run `terraform`
 
   ```bash
   export VAULT_TOKEN=$(cat /tmp/vault-output.txt | grep "Initial Root Token:" | sed -e "s/Initial Root Token: //g")
   ```
 
-1. Run `terraform` to configure Vault
+3. Run `terraform` to configure Vault
 
   ```bash
   cd ./terraform; terraform plan; terraform apply; cd ..
   ```
 
-## InSpec Compliance Testing
+### InSpec Compliance Testing
+
+_Currently we are not using the `inspec-vault` plugin, but we may incorporate into this demo in the future
 
 > Note that the `inspec-vault` plugin currently only provides the capability to test KV secrets
 
-Install the `inspec-vault` plugin:
+4. Install the `inspec-vault` plugin:
 
 ```bash
 inspec plugin install inspec-vault
 ```
 
-1. Run `inspec` tests
+5. Run `inspec` tests
 
   ```bash
   inspec exec ./vault/profile
