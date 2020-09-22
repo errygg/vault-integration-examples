@@ -32,7 +32,7 @@ deployed HashiCorp Vault resources. This can be done in 2 ways as described:
 
 ### InSpec Compliance Testing
 
-_Currently we are not using the `inspec-vault` plugin, but we may incorporate into this demo in the future
+_Currently we are not using the `inspec-vault` plugin, but we may incorporate into this demo in the future_
 
 > Note that the `inspec-vault` plugin currently only provides the capability to test KV secrets
 
