@@ -1,13 +1,17 @@
 # Jenkins Vault Plugin Demo
 
+This example show how to integrate Jenkins Vault Plugin with Vault using a long
+lived token. Additionally, this example shows how to use Vault Agent to manage
+the token used by Jenkins to provide a way to have short lived tokens.
+
 ## Start the Jenkins server
 
 ```sh
-$ brew service start jenkins
+brew service start jenkins
 
-$ open http://localhost:8080
+open http://localhost:8080
 
-$ cat ~/.jenkins/initialAdminPassword
+cat ~/.jenkins/initialAdminPassword
 ```
 
 1. Select default plugins to install
@@ -27,26 +31,22 @@ $ cat ~/.jenkins/initialAdminPassword
 1. Scroll down to "Pipeline" -> Select "Definition: Pipeline script" and change to "Pipeline script from SCM"
 1. Select "SCM: None" and change to "Git" and enter Repository URL, the branch, and the file location for `Jenkinsfile`
 1. Select "Save"
-
-2. Start and configure Vault
+1. Start and configure Vault
 
 ```sh
-$ cd vault
-$ ./start-vault.sh
-$ ./configure-vault.sh
-$ cd ..
+cd vault
+./start-vault.sh
+./configure-vault.sh
+cd ..
 ```
 
 1. Get the approle for Jenkins
 
 ```sh
-$ export VAULT_ADDR=http://127.0.0.1:8200
-
-$ export VAULT_TOKEN=`cat /tmp/vault-output.txt |grep "Initial Root Token:" | sed -e "s/Initial Root Token: //g"`
-
-$ vault read auth/approle/role/jenkins/role-id
-
-$ vault write -f auth/approle/role/jenkins/secret-id
+export VAULT_ADDR=http://127.0.0.1:8200
+export VAULT_TOKEN=`cat /tmp/vault-output.txt |grep "Initial Root Token:" | sed -e "s/Initial Root Token: //g"`
+vault read auth/approle/role/jenkins/role-id
+vault write -f auth/approle/role/jenkins/secret-id
 ```
 
 1. Add the credential to Jenkins
@@ -57,23 +57,19 @@ $ vault write -f auth/approle/role/jenkins/secret-id
 
 ## Vault Agent Example
 
-1. Remove the credential and recreate with "Vault Token File Credential"
+1. Remove the credential in Jenkins and recreate with "Vault Token File Credential"
 
 1. Run Vault agent
 
 ```sh
-
+cd vault-agent
+./start-vault-agent.sh
+cd ..
 ```
 
-2. Vault agent can now be used to manage this credential
+1. Vault agent can now be used to manage this credential
 
-
-
-
-
-
-
-
+---
 Guidance from Cloudbees:
 
 * storing the files containing secrets outside the workspace
@@ -83,9 +79,9 @@ Guidance from Cloudbees:
 * storing all files containing secrets in a single directory tree
 * giving the directory tree an obvious name (e.g. /secrets) to help those using the system understand what they are
 
+---
 My guidance:
 
 For token management on Jenkins, the Jenkins Vault Plugin has a Vault Token File Credential that can be used in conjunction with Vault Agent Caching capability to keep the token fresh. The Jenkins Vault Plugin documentation calls out "You can use this in combination with a script that periodically refreshes your token." In this case the script would be Vault Agent."
 
-
-# Vault Agent
+> Note that this example uses the sink file as the Jenkins Vault Plugin token. This is not necessarily the best way to provide the token to Jenkins, but merely an easy way to show _how_ this can be integrated. A better method would be to have Jenkins request credentials from Vault using a template file or something like that. (TODO: still iterating on this design)
