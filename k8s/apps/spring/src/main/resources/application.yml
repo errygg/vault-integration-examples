@@ -1,0 +1,4 @@
+spring:
+  application.name: application
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect

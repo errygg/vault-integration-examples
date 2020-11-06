@@ -1,0 +1,26 @@
+spring:
+  cloud.vault:
+    uri: http://127.0.0.1:8200
+
+    # Using Token authentication to test
+    token: s.kOtly6La5JyyrTHaJ1iRmiXQ
+
+    #namespace: ns1
+    #authentication: pcf
+    #role: flasktest
+    #pcf.pcf-path: cf
+
+    # KV configurations, this enables reading from the Vault path of: /kv/vaultpcf
+    kv:
+     enabled: true
+     backend: kv
+     default-context: application
+
+    # MySQL database configurations, this enables reading from the Vault path of: /database
+    database:
+      enabled: true
+      role: db-spring
+      backend: database
+
+  # Datasource URL for MySQL
+  datasource.url: "jdbc:mysql://localhost:3306/mydb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"

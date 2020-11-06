@@ -15,7 +15,7 @@ end
 control "control-03" do
   describe vault_auth_method("database/approle/") do
     its('type') { should eq "approle" }
-    its('default_lease_ttl') { should be 0 }
+    its('default_lease_ttl') { should be 60 }
     its('max_lease_ttl') { should be 0 }
     its('token_type') { should eq "default-service" }
   end

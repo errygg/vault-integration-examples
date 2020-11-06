@@ -18,10 +18,11 @@ deployed HashiCorp Vault resources. This can be done in 2 ways as described:
   ./scripts/configure-vault.sh
   ```
 
-2. Set the token to run `terraform`
+2. Set the token and addr to run `terraform`
 
   ```bash
   export VAULT_TOKEN=$(cat /tmp/vault-output.txt | grep "Initial Root Token:" | sed -e "s/Initial Root Token: //g")
+  export VAULT_ADDR=http://127.0.0.1:8200
   ```
 
 3. Run `terraform` to configure Vault
@@ -38,9 +39,9 @@ _Currently we are not using the `inspec-vault` plugin, but we may incorporate in
 
 4. Install the `inspec-vault` plugin:
 
-```bash
-inspec plugin install inspec-vault
-```
+  ```bash
+  inspec plugin install inspec-vault
+  ```
 
 5. Run `inspec` tests
 
